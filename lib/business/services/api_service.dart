@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_packages_experiment/business/interfaces/i_api_service.dart';
 import 'package:flutter_packages_experiment/business/models/dog_breed.dart';
 import 'package:http/http.dart' as http;
@@ -14,10 +15,12 @@ class ApiService implements IApiService {
   @override
   Future<List<DogBreed>> fetchDogBreeds() async {
     final response = await _client.get(Uri.parse('${ApiConstants.dogApi}breeds/list/all'));
+    return compute(parseDogBreeds, response.body);
+  }
 
+  static List<DogBreed> parseDogBreeds(String responseBody) {
     // This json isn't formatted very well, had to do this a little different
-    final Map<String, dynamic> parsed = jsonDecode(response.body)["message"];
-
+    final Map<String, dynamic> parsed = jsonDecode(responseBody)["message"];
     return parsed.keys.map((e) => DogBreed.fromJson(e)).toList();
   }
 }
