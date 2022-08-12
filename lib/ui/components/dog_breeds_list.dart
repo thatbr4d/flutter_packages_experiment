@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_packages_experiment/business/models/dog_breed.dart';
+
+import '/business/models/dog_breed.dart';
 
 class DogBreedsList extends StatelessWidget {
   const DogBreedsList({Key? key, required this.breeds}) : super(key: key);

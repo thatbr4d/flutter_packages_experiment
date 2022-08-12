@@ -1,9 +1,31 @@
-import 'package:flutter_packages_experiment/business/interfaces/i_api_service.dart';
-import 'package:flutter_packages_experiment/business/models/dog_breed.dart';
-import 'package:flutter_packages_experiment/business/services/service_registration.dart';
+import 'package:flutter/foundation.dart';
 
-class DogBreedsViewModel {
+import '/business/interfaces/i_api_service.dart';
+import '/business/models/dog_breed.dart';
+import '/business/services/service_registration.dart';
+
+class DogBreedsViewModel extends ChangeNotifier {
   final _apiService = locator<IApiService>();
 
-  Future<List<DogBreed>> get dogBreeds => _apiService.fetchDogBreeds();
+  List<DogBreed>? dogBreeds;
+  List<DogBreed>? filteredDogBreeds;
+
+  Future<List<DogBreed>> fetchDogBreeds() async {
+    if (filteredDogBreeds == null) {
+      filteredDogBreeds = await _apiService.fetchDogBreeds();
+      dogBreeds = List.from(filteredDogBreeds!);
+    }
+
+    return Future<List<DogBreed>>.value(filteredDogBreeds);
+  }
+
+  filterDogBreeds(String search) {
+    if (search.isEmpty) {
+      filteredDogBreeds = List.from(dogBreeds!);
+    } else {
+      filteredDogBreeds = dogBreeds!.where((x) => x.breed.toLowerCase().contains(search.toLowerCase())).toList();
+    }
+
+    notifyListeners();
+  }
 }
