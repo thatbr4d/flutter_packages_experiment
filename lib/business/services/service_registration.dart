@@ -1,7 +1,9 @@
-import 'package:flutter_packages_experiment/business/interfaces/i_api_service.dart';
-import 'package:flutter_packages_experiment/business/services/api_service.dart';
-import 'package:flutter_packages_experiment/ui/viewmodels/dog_breeds_viewmodel.dart';
 import 'package:get_it/get_it.dart';
+
+import '/business/interfaces/i_api_service.dart';
+import '/business/services/api_service.dart';
+import '/ui/viewmodels/dog_breeds_viewmodel.dart';
+import '/ui/viewmodels/dog_breed_detail_viewmodel.dart';
 
 final locator = GetIt.instance;
 
@@ -11,4 +13,5 @@ void initLocator() {
 
   // view models
   locator.registerLazySingleton(() => DogBreedsViewModel());
+  locator.registerLazySingleton(() => DogBreedDetailViewModel());
 }

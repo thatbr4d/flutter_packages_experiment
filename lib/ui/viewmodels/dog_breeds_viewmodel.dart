@@ -5,7 +5,7 @@ import '/business/models/dog_breed.dart';
 import '/business/services/service_registration.dart';
 
 class DogBreedsViewModel extends ChangeNotifier {
-  final _apiService = locator<IApiService>();
+  final IApiService _apiService = locator<IApiService>();
 
   List<DogBreed>? dogBreeds;
   List<DogBreed>? filteredDogBreeds;

@@ -23,4 +23,16 @@ class ApiService implements IApiService {
     final Map<String, dynamic> parsed = jsonDecode(responseBody)["message"];
     return parsed.entries.map((e) => DogBreed.fromJson(e.key, e.value)).toList();
   }
+
+  @override
+  Future<String> fetchRandomDogBreedImageUrl(String breed) async {
+    final response = await _client.get(Uri.parse('${ApiConstants.dogApi}breed/$breed/images/random'));
+    return jsonDecode(response.body)["message"];
+  }
+
+  @override
+  Future<String> fetchRandomDogSubBreedImageUrl(String breed, String subBreed) async {
+    final response = await _client.get(Uri.parse('${ApiConstants.dogApi}breed/$breed/$subBreed/images/random'));
+    return jsonDecode(response.body)["message"];
+  }
 }

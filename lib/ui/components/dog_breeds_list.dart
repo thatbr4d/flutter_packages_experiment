@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '/ui/views/dog_breed_detail_view.dart';
 import '/business/models/dog_breed.dart';
 
 class DogBreedsList extends StatelessWidget {
@@ -17,7 +18,15 @@ class DogBreedsList extends StatelessWidget {
           child: Card(
             child: InkWell(
               splashColor: Colors.blue.withAlpha(30),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DogBreedDetailView(
+                            dogBreed: breeds[index],
+                          )),
+                );
+              },
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
