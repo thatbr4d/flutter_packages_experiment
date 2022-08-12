@@ -21,6 +21,6 @@ class ApiService implements IApiService {
   static List<DogBreed> parseDogBreeds(String responseBody) {
     // This json isn't formatted very well, had to do this a little different
     final Map<String, dynamic> parsed = jsonDecode(responseBody)["message"];
-    return parsed.keys.map((e) => DogBreed.fromJson(e)).toList();
+    return parsed.entries.map((e) => DogBreed.fromJson(e.key, e.value)).toList();
   }
 }

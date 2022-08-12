@@ -9,18 +9,32 @@ class DogBreedsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return ListView.builder(
       padding: const EdgeInsets.all(10),
       itemCount: breeds.length,
       itemBuilder: (context, index) {
-        return Container(
-          height: 50,
-          child: Center(
-            child: Text(breeds[index].breed.toString()),
+        return Center(
+          child: Card(
+            child: InkWell(
+              splashColor: Colors.blue.withAlpha(30),
+              onTap: () {},
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    title: Center(
+                      child: Text(breeds[index].breed.toString()),
+                    ),
+                    subtitle: Center(
+                      child: Text(breeds[index].subBreeds == null ? "" : breeds[index].subBreeds!.map((e) => e.breed).join(", ")),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         );
       },
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 }

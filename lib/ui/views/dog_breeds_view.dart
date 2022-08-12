@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_packages_experiment/business/services/service_registration.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 
+import '/business/services/service_registration.dart';
 import '/business/models/dog_breed.dart';
 import '/ui/components/dog_breeds_list.dart';
 import '/ui/viewmodels/dog_breeds_viewmodel.dart';

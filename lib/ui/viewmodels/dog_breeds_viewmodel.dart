@@ -23,7 +23,11 @@ class DogBreedsViewModel extends ChangeNotifier {
     if (search.isEmpty) {
       filteredDogBreeds = List.from(dogBreeds!);
     } else {
-      filteredDogBreeds = dogBreeds!.where((x) => x.breed.toLowerCase().contains(search.toLowerCase())).toList();
+      filteredDogBreeds = dogBreeds!
+          .where((x) =>
+              x.breed.toLowerCase().contains(search.toLowerCase()) ||
+              (x.subBreeds != null && x.subBreeds!.any((sub) => sub.breed.toLowerCase().contains(search.toLowerCase()))))
+          .toList();
     }
 
     notifyListeners();
