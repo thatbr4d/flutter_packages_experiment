@@ -18,6 +18,10 @@ class BottomNav extends StatelessWidget {
           icon: Icon(Icons.picture_as_pdf),
           label: 'PDF',
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.web),
+          label: 'HTML',
+        ),
       ],
       currentIndex: selectedIndex,
       selectedItemColor: Theme.of(context).primaryColor,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_packages_experiment/business/services/service_registration.dart';
-import 'package:flutter_packages_experiment/ui/components/bottom_nav_bar.dart';
-import 'package:flutter_packages_experiment/ui/views/dog_breeds_view.dart';
-import 'package:flutter_packages_experiment/ui/views/pdf_main_view.dart';
+
+import '/business/services/service_registration.dart';
+import '/ui/components/bottom_nav_bar.dart';
+import '/ui/views/dog_breeds_view.dart';
+import '/ui/views/html_main_view.dart';
+import '/ui/views/pdf_main_view.dart';
 
 void main() {
   initLocator();
@@ -36,6 +38,7 @@ class _MainViewState extends State<MainView> {
   final screens = [
     DogBreedsView(),
     const PDFMainView(),
+    const HtmlMainView(),
   ];
 
   _onItemTapped(value) {
