@@ -41,6 +41,11 @@ class _MainViewState extends State<MainView> {
     const HtmlMainView(),
   ];
 
+  @override
+  initState() {
+    super.initState();
+  }
+
   _onItemTapped(value) {
     setState(() {
       _selectedIndex = value;

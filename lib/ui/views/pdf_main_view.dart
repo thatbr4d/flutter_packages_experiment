@@ -119,15 +119,7 @@ class _PDFMainViewState extends State<PDFMainView> {
                     duration: const Duration(milliseconds: 100),
                   );
           },
-        ),
-        IconButton(
-          icon: const Icon(Icons.refresh),
-          onPressed: () {
-            isWindows
-                ? pdfController.loadDocument(PdfDocument.openAsset('assets/pdf_sample.pdf'))
-                : pdfControllerPinch.loadDocument(PdfDocument.openAsset('assets/pdf_sample.pdf'));
-          },
-        ),
+        )
       ],
     );
   }

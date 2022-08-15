@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_packages_experiment/business/interfaces/i_api_service.dart';
-import 'package:flutter_packages_experiment/business/models/dog_breed.dart';
 import 'package:http/http.dart' as http;
+
+import '/business/interfaces/i_api_service.dart';
+import '/business/models/dog_breed.dart';
+import '/business/services/connection_service.dart';
+import '/business/services/service_registration.dart';
 
 class ApiConstants {
   static const String dogApi = 'https://dog.ceo/api/';
@@ -11,11 +14,18 @@ class ApiConstants {
 
 class ApiService implements IApiService {
   final _client = http.Client();
+  final _connectionService = locator.get<ConnectionService>();
 
   @override
   Future<List<DogBreed>> fetchDogBreeds() async {
-    final response = await _client.get(Uri.parse('${ApiConstants.dogApi}breeds/list/all'));
-    return compute(parseDogBreeds, response.body);
+    if (await _connectionService.isConnected()) {
+      final response = await _client.get(Uri.parse('${ApiConstants.dogApi}breeds/list/all'));
+
+      return compute(parseDogBreeds, response.body);
+    } else {
+      // TODO return cached
+      return Future<List<DogBreed>>.value(List.empty());
+    }
   }
 
   static List<DogBreed> parseDogBreeds(String responseBody) {
