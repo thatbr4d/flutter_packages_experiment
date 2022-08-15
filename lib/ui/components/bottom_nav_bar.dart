@@ -23,8 +23,8 @@ class BottomNav extends StatelessWidget {
           label: 'HTML',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.photo),
-          label: 'Photos',
+          icon: Icon(Icons.person),
+          label: 'User Post',
         ),
       ],
       currentIndex: selectedIndex,

@@ -8,6 +8,7 @@ import '/business/interfaces/i_api_service.dart';
 import '/business/models/dog_breed.dart';
 import '/business/services/connection_service.dart';
 import '/business/services/service_registration.dart';
+import '/business/models/user_post.dart';
 
 class ApiConstants {
   static const String dogApi = 'https://dog.ceo/api/';
@@ -47,16 +48,21 @@ class ApiService implements IApiService {
     return jsonDecode(response.body)["message"];
   }
 
+  @override
   Future<List<Photo>> fetchPhotos() async {
-    //return Future<List<Photo>>.value(List.empty());
-
     final response = await _client.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
-
     return compute(parsePhotos, response.body);
   }
 
   static List<Photo> parsePhotos(String responseBody) {
     final parsed = jsonDecode(responseBody);
     return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
+  }
+
+  Future<UserPost> fetchFirstPost() async {
+    final response = await _client.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+    final raw = response.body.replaceAll("\\n", "\\\\n");
+    final parsed = jsonDecode(raw);
+    return UserPost.fromJson(parsed);
   }
 }

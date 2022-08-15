@@ -5,6 +5,7 @@ import '/business/services/api_service.dart';
 import '/business/services/connection_service.dart';
 import '/ui/viewmodels/dog_breeds_viewmodel.dart';
 import '/ui/viewmodels/dog_breed_detail_viewmodel.dart';
+import '/ui/viewmodels/user_post_viewmodel.dart';
 
 final locator = GetIt.instance;
 
@@ -16,4 +17,5 @@ void initLocator() {
   // view models
   locator.registerLazySingleton(() => DogBreedsViewModel());
   locator.registerLazySingleton(() => DogBreedDetailViewModel());
+  locator.registerLazySingleton(() => UserPostViewModel());
 }

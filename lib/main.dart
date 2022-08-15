@@ -6,6 +6,7 @@ import '/ui/views/dog_breeds_view.dart';
 import '/ui/views/html_main_view.dart';
 import '/ui/views/pdf_main_view.dart';
 import '/ui/views/photos_view.dart';
+import '/ui/views/user_post_view.dart';
 
 void main() {
   initLocator();
@@ -40,7 +41,7 @@ class _MainViewState extends State<MainView> {
     DogBreedsView(),
     const PDFMainView(),
     const HtmlMainView(),
-    PhotosView(),
+    UserPostView(),
   ];
 
   @override
