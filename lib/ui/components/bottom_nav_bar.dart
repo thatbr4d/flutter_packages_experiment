@@ -22,10 +22,15 @@ class BottomNav extends StatelessWidget {
           icon: Icon(Icons.web),
           label: 'HTML',
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.photo),
+          label: 'Photos',
+        ),
       ],
       currentIndex: selectedIndex,
       selectedItemColor: Theme.of(context).primaryColor,
       onTap: onItemTapped,
+      type: BottomNavigationBarType.fixed,
     );
   }
 }

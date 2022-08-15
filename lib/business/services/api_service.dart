@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
+import '/business/models/photo.dart';
 import '/business/interfaces/i_api_service.dart';
 import '/business/models/dog_breed.dart';
 import '/business/services/connection_service.dart';
@@ -44,5 +45,18 @@ class ApiService implements IApiService {
   Future<String> fetchRandomDogSubBreedImageUrl(String breed, String subBreed) async {
     final response = await _client.get(Uri.parse('${ApiConstants.dogApi}breed/$breed/$subBreed/images/random'));
     return jsonDecode(response.body)["message"];
+  }
+
+  Future<List<Photo>> fetchPhotos() async {
+    //return Future<List<Photo>>.value(List.empty());
+
+    final response = await _client.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
+
+    return compute(parsePhotos, response.body);
+  }
+
+  static List<Photo> parsePhotos(String responseBody) {
+    final parsed = jsonDecode(responseBody);
+    return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
   }
 }
