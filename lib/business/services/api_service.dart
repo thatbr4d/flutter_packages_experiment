@@ -9,6 +9,7 @@ import '/business/models/dog_breed.dart';
 import '/business/services/connection_service.dart';
 import '/business/services/service_registration.dart';
 import '/business/models/user_post.dart';
+import '/business/services/cache_service.dart';
 
 class ApiConstants {
   static const String dogApi = 'https://dog.ceo/api/';
@@ -17,6 +18,7 @@ class ApiConstants {
 class ApiService implements IApiService {
   final _client = http.Client();
   final _connectionService = locator.get<ConnectionService>();
+  final _cachService = locator.get<CacheService>();
 
   @override
   Future<List<DogBreed>> fetchDogBreeds() async {
@@ -60,9 +62,19 @@ class ApiService implements IApiService {
   }
 
   Future<UserPost> fetchFirstPost() async {
-    final response = await _client.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
-    final raw = response.body.replaceAll("\\n", "\\\\n");
-    final parsed = jsonDecode(raw);
-    return UserPost.fromJson(parsed);
+    if (await _connectionService.isConnected()) {
+      final response = await _client.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+      final raw = response.body.replaceAll("\\n", "\\\\n");
+      final parsed = jsonDecode(raw);
+      final post = UserPost.fromJson(parsed);
+
+      await _cachService.addUserPost(post);
+
+      return post;
+    }
+
+    final post = await _cachService.getUserPost();
+    // Probably need to allow empty constructors for new objects?
+    return post ?? UserPost(userId: 0, id: 0, title: "", body: "");
   }
 }

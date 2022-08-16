@@ -253,6 +253,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.3"
+  equatable:
+    dependency: transitive
+    description:
+      name: equatable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.3"
   extension:
     dependency: transitive
     description:
@@ -581,6 +588,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
+  stash:
+    dependency: "direct main"
+    description:
+      name: stash
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.3.2"
+  stash_file:
+    dependency: "direct main"
+    description:
+      name: stash_file
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.3.2"
+  stash_memory:
+    dependency: "direct main"
+    description:
+      name: stash_memory
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.3.2"
   stream_channel:
     dependency: transitive
     description:

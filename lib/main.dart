@@ -8,8 +8,11 @@ import '/ui/views/pdf_main_view.dart';
 import '/ui/views/photos_view.dart';
 import '/ui/views/user_post_view.dart';
 
-void main() {
+void main() async {
   initLocator();
+
+  //this should be in a future on startup
+  await locator.allReady();
 
   runApp(const MyApp());
 }
